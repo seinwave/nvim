@@ -24,6 +24,18 @@ vim.api.nvim_set_keymap('n', '<C-h>', ':wincmd h<CR>', { noremap = true, silent 
 vim.api.nvim_set_keymap('n', '<C-l>', ':wincmd l<CR>', { noremap = true, silent = true })
 
 
+-- move between panes, specifically for Fugitive buffers 
+vim.cmd [[
+  augroup fugitive_mappings
+    autocmd!
+    autocmd FileType fugitive nmap <buffer> <C-k> <C-w>k
+    autocmd FileType fugitive nmap <buffer> <C-j> <C-w>j
+    autocmd FileType fugitive nmap <buffer> <C-h> <C-w>h
+    autocmd FileType fugitive nmap <buffer> <C-l> <C-w>l
+  augroup END
+]]
+
+
 function copy_relative_path()
   -- Find the root directory
   local root_dir = vim.fn.systemlist('git rev-parse --show-toplevel')[1]
