@@ -38,6 +38,7 @@ lsp_zero.on_attach(function(client, bufnr)
         }
         client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
     end
+
 end)
 
 require('mason').setup({})
