@@ -29,15 +29,6 @@ lsp_zero.on_attach(function(client, bufnr)
 	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
 	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
 	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-
-        -- Split mappings
-	vim.keymap.set("n", "<leader>vs", function() vim.cmd('split') end, opts) -- Open a horizontal split
-	vim.keymap.set("n", "<leader>vv", function() vim.cmd('vsplit') end, opts) -- Open a vertical split
-	vim.keymap.set("n", "<leader>q", function() vim.cmd('q') end, opts) -- Close a split
-	vim.keymap.set("n", "<leader>h", function() vim.cmd('wincmd h') end, opts) -- Navigate to the left split
-	vim.keymap.set("n", "<leader>j", function() vim.cmd('wincmd j') end, opts) -- Navigate to the bottom split
-	vim.keymap.set("n", "<leader>k", function() vim.cmd('wincmd k') end, opts) -- Navigate to the top split
-	vim.keymap.set("n", "<leader>l", function() vim.cmd('wincmd l') end, opts) -- Navigate to the right spli
 end)
 
 
