@@ -1,2 +1,2 @@
-require('matt')
-print("your stuff is initialized")
+require('config')
+print("config is fig'd")
