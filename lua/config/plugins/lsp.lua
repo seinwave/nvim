@@ -16,6 +16,8 @@ return {
     },
     config = function()
       require("lspconfig").lua_ls.setup {}
+      require("lspconfig").ts_ls.setup {}
+      require("lspconfig").jdtls.setup {}
       require("lspconfig").solargraph.setup {}
 
       vim.api.nvim_create_autocmd('LspAttach', {

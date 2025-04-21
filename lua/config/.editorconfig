@@ -1,3 +1,7 @@
 [*.lua]
 indent_style = space
 indent_size = 2
+
+[*.ruby]
+indent_style = space
+indent_size = 2
