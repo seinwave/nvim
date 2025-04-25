@@ -1,4 +1,4 @@
-local lspconfig = require("nvim-lspconfig")
+--local lspconfig = require("nvim-lspconfig")
 
 return {
   {
@@ -25,7 +25,7 @@ return {
     rubocop = {
       -- See: https://docs.rubocop.org/rubocop/usage/lsp.html
       cmd = { "bundle", "exec", "rubocop", "--lsp" },
-      root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+      -- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
     },
     config = function()
       require("lspconfig").lua_ls.setup {}
