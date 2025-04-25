@@ -1,3 +1,5 @@
+local lspconfig = require("nvim-lspconfig")
+
 return {
   {
     "neovim/nvim-lspconfig",
@@ -14,12 +16,23 @@ return {
         },
       },
     },
+    ruby_lsp = {
+      -- cmd = { "bundle", "exec", "ruby-lsp" },
+      -- init_options = {
+      --   formatter = "auto",
+      -- },
+    },
+    rubocop = {
+      -- See: https://docs.rubocop.org/rubocop/usage/lsp.html
+      cmd = { "bundle", "exec", "rubocop", "--lsp" },
+      root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
+    },
     config = function()
       require("lspconfig").lua_ls.setup {}
       require("lspconfig").ts_ls.setup {}
       require("lspconfig").jdtls.setup {}
       require("lspconfig").solargraph.setup {}
-
+      require("mason").setup {}
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('my.lsp', {}),
         callback = function(args)
