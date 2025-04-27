@@ -1,5 +1,3 @@
---local lspconfig = require("nvim-lspconfig")
-
 return {
   {
     "neovim/nvim-lspconfig",
@@ -16,23 +14,62 @@ return {
         },
       },
     },
-    ruby_lsp = {
-      -- cmd = { "bundle", "exec", "ruby-lsp" },
-      -- init_options = {
-      --   formatter = "auto",
-      -- },
-    },
-    rubocop = {
-      -- See: https://docs.rubocop.org/rubocop/usage/lsp.html
-      cmd = { "bundle", "exec", "rubocop", "--lsp" },
-      -- root_dir = lspconfig.util.root_pattern("Gemfile", ".git", "."),
-    },
     config = function()
-      require("lspconfig").lua_ls.setup {}
-      require("lspconfig").ts_ls.setup {}
-      require("lspconfig").jdtls.setup {}
-      require("lspconfig").solargraph.setup {}
+      local lspconfig = require("lspconfig")
       require("mason").setup {}
+
+      require("mason-lspconfig").setup({
+        ensure_installed = {
+          'lua_ls',
+          'eslint',
+          'html',
+          'cssls',
+          'ts_ls',
+          'jdtls',
+          'marksman',
+          'solargraph'
+        },
+        automatic_installation = false
+      })
+
+      local capabilities = require('blink.cmp').get_lsp_capabilities()
+      lspconfig.lua_ls.setup { capabiliies = capabilities }
+      lspconfig.solargraph.setup { capabilities = capabilities }
+      lspconfig.ts_ls.setup { capabiliies = capabilities }
+      lspconfig.eslint.setup { capabilities = capabilities }
+      lspconfig.cssls.setup { capabiliies = capabilities }
+      lspconfig.jdtls.setup { capabilities = capabilities }
+      lspconfig.html.setup { capabiliies = capabilities }
+      lspconfig.marksman.setup { capabilities = capabilities }
+
+      -- LSP key-mappings
+      local lsp_cmds = vim.api.nvim_create_augroup('lsp_cmds', { clear = true })
+
+      vim.api.nvim_create_autocmd('LspAttach', {
+        group = lsp_cmds,
+        desc = 'LSP actions',
+        callback = function()
+          local bufmap = function(mode, lhs, rhs)
+            vim.keymap.set(mode, lhs, rhs, { buffer = true })
+          end
+
+          bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
+          bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')
+          bufmap('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>')
+          bufmap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>')
+          bufmap('n', 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>')
+          bufmap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>')
+          bufmap('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
+          bufmap('n', 'vrn', '<cmd>lua vim.lsp.buf.rename()<cr>')
+          bufmap({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
+          bufmap('n', 'vca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
+          bufmap('n', 'fd', '<cmd>lua vim.diagnostic.open_float()<cr>')
+          bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
+          bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
+        end
+      })
+
+      -- Format-on-save
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('my.lsp', {}),
         callback = function(args)
