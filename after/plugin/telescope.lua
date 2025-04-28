@@ -7,12 +7,14 @@ end);
 
 vim.keymap.set('n', '<leader>pc', function()
 	builtin.find_files {
+		prompt_title = "Your Nvim Config",
 		cwd = vim.fn.stdpath("config")
 	}
 end)
 
 vim.keymap.set('n', '<leader>pp', function()
 	builtin.find_files {
+		prompt_title = "Vim Plugin Files",
 		cwd = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy')
 	}
 end)
