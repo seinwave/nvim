@@ -32,15 +32,48 @@ return {
         automatic_installation = false
       })
 
+      -- add blink's autocomplete to LSPs
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       lspconfig.lua_ls.setup { capabiliies = capabilities }
-      lspconfig.solargraph.setup { capabilities = capabilities }
       lspconfig.ts_ls.setup { capabiliies = capabilities }
       lspconfig.eslint.setup { capabilities = capabilities }
       lspconfig.cssls.setup { capabiliies = capabilities }
-      lspconfig.jdtls.setup { capabilities = capabilities }
       lspconfig.html.setup { capabiliies = capabilities }
       lspconfig.marksman.setup { capabilities = capabilities }
+
+      -- Ruby and Java configurations — do NOT use Mason to manage these
+      lspconfig.ruby_lsp.setup {
+        cmd = { 'ruby-lsp' },
+        filetypes = { 'ruby', 'eruby' },
+        init_options = {
+          formatter = 'standard',
+          linters = { 'standard' },
+          addonSettings = {
+            ["Ruby LSP Rails"] = {
+              enablePendingMigrationsPrompt = false,
+            },
+          },
+          capabilities = capabilities } }
+
+      lspconfig.jdtls.setup {
+        cmd = {
+          '/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home/'
+        },
+        settings = {
+          java = {
+            configuration = {
+              -- jdtls requires > 21 to run, but your projects are on Java 17
+              runtimes = {
+                {
+                  name = "JavaSE-17",
+                  path = "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home",
+                },
+                {
+                  name = "JavaSE-24",
+                  path = "/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home",
+                },
+              } } } },
+        capabilities = capabilities }
 
       -- LSP key-mappings
       local lsp_cmds = vim.api.nvim_create_augroup('lsp_cmds', { clear = true })
