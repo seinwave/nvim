@@ -27,7 +27,6 @@ return {
           'ts_ls',
           'jdtls',
           'marksman',
-          'solargraph'
         },
         automatic_installation = false
       })
