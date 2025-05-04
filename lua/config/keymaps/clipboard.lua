@@ -6,8 +6,6 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.opt.clipboard = "unnamedplus"
-
 -- Copy to clipboard
 vim.api.nvim_set_keymap('v', '<leader>y', '"+y', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>Y', '"+yg_', { noremap = true })

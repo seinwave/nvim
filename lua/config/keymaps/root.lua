@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 
-local cwd = vim.uv.cwd()
-vim.keymap.set("n", "<leader>pv", "<CMD>Oil --float " .. cwd .. "<CR>", { desc = "Open Oil (float) at CWD" })
+vim.keymap.set("n", "<leader>pv", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
+vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open parent directory" })
 
 -- lua execution
 vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<CR>")
