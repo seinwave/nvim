@@ -101,6 +101,12 @@ return {
         end
       })
 
+      -- handling the annoying edge-case of podfiles
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = { "Podfile", "Podfile.*" },
+        command = "set filetype=ruby"
+      })
+
 
       -- format-on-save with conform TODO: add LSPs / formatters
       require("conform").setup({
