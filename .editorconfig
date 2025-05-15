@@ -2,6 +2,10 @@
 indent_style = space
 indent_size = 2
 
-[*.ruby]
+[*.rb]
 indent_style = space
 indent_size = 2
+
+[*.ts]
+indent_style = tab
+indent_size = 1
