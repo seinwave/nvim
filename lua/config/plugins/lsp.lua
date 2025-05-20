@@ -54,6 +54,11 @@ return {
           },
           capabilities = capabilities } }
 
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = { "Podfile", "Podfile.*", "Fastfile", "Fastfile.*" },
+        command = 'set filetype=ruby'
+      })
+
       lspconfig.jdtls.setup {
         cmd = {
           '/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home/'
@@ -84,6 +89,7 @@ return {
           local bufmap = function(mode, lhs, rhs)
             vim.keymap.set(mode, lhs, rhs, { buffer = true })
           end
+
 
           bufmap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>')
           bufmap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>')

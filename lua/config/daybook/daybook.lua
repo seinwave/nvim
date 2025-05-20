@@ -13,7 +13,6 @@ M.config = {
 local function get_formatted_date()
   return os.date("%A, %B %d, %Y")
 end
-   Taking notes is hard in here
 
 local function has_todays_header(bufnr)
   local today = get_formatted_date()
