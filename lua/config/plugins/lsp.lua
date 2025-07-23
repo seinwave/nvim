@@ -31,11 +31,20 @@ return {
         automatic_installation = false
       })
 
+      local function on_attach(client, bufnr)
+        local filetype = vim.api.nvim_buf_get_option(bufnr, "filetype")
+        if (client.name == "tsserver" or client.name == "ts_ls") and (filetype == "typescript" or filetype == "typescriptreact" or filetype == "javascript" or filetype == "javascriptreact") then
+          client.server_capabilities.documentFormattingProvider = false
+          client.server_capabilities.documentRangeFormattingProvider = false
+        end
+        -- ... rest of your on_attach setup if any ...
+      end
+
       -- add blink's autocomplete to LSPs
       local capabilities = require('blink.cmp').get_lsp_capabilities()
       lspconfig.lua_ls.setup { capabiliies = capabilities }
-      lspconfig.ts_ls.setup { capabiliies = capabilities }
-      lspconfig.eslint.setup { capabilities = capabilities }
+      lspconfig.ts_ls.setup { on_attach = on_attach, capabilities = capabilities }
+      lspconfig.eslint.setup { on_attach = on_attach, capabilities = capabilities }
       lspconfig.cssls.setup { capabiliies = capabilities }
       lspconfig.html.setup { capabiliies = capabilities }
       lspconfig.marksman.setup { capabilities = capabilities }
@@ -114,6 +123,12 @@ return {
           -- These options will be passed to conform.format()
           timeout_ms = 500,
           lsp_format = "fallback",
+        },
+        formatters_by_ft = {
+          javascript = { "eslint_d", "prettier" },
+          javascriptreact = { "eslint_d", "prettier" },
+          typescript = { "eslint_d", "prettier" },
+          typescriptreact = { "eslint_d", "prettier" },
         },
       })
     end
