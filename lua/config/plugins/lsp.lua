@@ -37,7 +37,6 @@ return {
           client.server_capabilities.documentFormattingProvider = false
           client.server_capabilities.documentRangeFormattingProvider = false
         end
-        -- ... rest of your on_attach setup if any ...
       end
 
       -- add blink's autocomplete to LSPs
@@ -79,10 +78,10 @@ return {
         cmd = {
           '/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home/'
         },
+        env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home" },
         settings = {
           java = {
             configuration = {
-              -- jdtls requires > 21 to run, but your projects are on Java 17
               runtimes = {
                 {
                   name = "JavaSE-17",
@@ -124,10 +123,8 @@ return {
       })
 
 
-      -- format-on-save with conform TODO: add LSPs / formatters
       require("conform").setup({
         format_on_save = {
-          -- These options will be passed to conform.format()
           timeout_ms = 500,
           lsp_format = "fallback",
         },
