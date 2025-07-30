@@ -49,6 +49,13 @@ return {
       lspconfig.html.setup { capabiliies = capabilities }
       lspconfig.marksman.setup { capabilities = capabilities }
 
+      lspconfig.sourcekit.setup {
+        cmd = { '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp' },
+        filetypes = { "swift", "objective-c", "objective-cpp" },
+        capabilities = capabilities,
+        on_attach = on_attach,
+      }
+
       -- Ruby and Java configurations — do NOT use Mason to manage these
       lspconfig.ruby_lsp.setup {
         cmd = { 'ruby-lsp' },
@@ -129,6 +136,7 @@ return {
           javascriptreact = { "eslint_d", "prettier" },
           typescript = { "eslint_d", "prettier" },
           typescriptreact = { "eslint_d", "prettier" },
+          swift = { "swift_format" },
         },
       })
     end
