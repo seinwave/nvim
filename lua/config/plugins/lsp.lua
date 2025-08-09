@@ -41,11 +41,11 @@ return {
 
       -- add blink's autocomplete to LSPs
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      lspconfig.lua_ls.setup { capabiliies = capabilities }
+      lspconfig.lua_ls.setup { capabilities = capabilities }
       lspconfig.ts_ls.setup { on_attach = on_attach, capabilities = capabilities }
       lspconfig.eslint.setup { on_attach = on_attach, capabilities = capabilities }
-      lspconfig.cssls.setup { capabiliies = capabilities }
-      lspconfig.html.setup { capabiliies = capabilities }
+      lspconfig.cssls.setup { capabilities = capabilities }
+      lspconfig.html.setup { capabilities = capabilities }
       lspconfig.marksman.setup { capabilities = capabilities }
 
       lspconfig.sourcekit.setup {
@@ -59,6 +59,7 @@ return {
       lspconfig.ruby_lsp.setup {
         cmd = { 'ruby-lsp' },
         filetypes = { 'ruby', 'eruby' },
+        capabilities = capabilities,
         init_options = {
           formatter = 'standard',
           linters = { 'standard' },
@@ -67,7 +68,8 @@ return {
               enablePendingMigrationsPrompt = false,
             },
           },
-          capabilities = capabilities } }
+        }
+      }
 
       vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         pattern = { "Podfile", "Podfile.*", "Fastfile", "Fastfile.*" },
