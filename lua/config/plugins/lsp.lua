@@ -15,7 +15,6 @@ return {
       },
     },
     config = function()
-      local lspconfig = require("lspconfig")
       require("mason").setup {}
 
       require("mason-lspconfig").setup({
@@ -25,7 +24,6 @@ return {
           'html',
           'cssls',
           'ts_ls',
-          'jdtls',
           'marksman',
         },
         automatic_installation = false
@@ -41,22 +39,19 @@ return {
 
       -- add blink's autocomplete to LSPs
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      lspconfig.lua_ls.setup { capabiliies = capabilities }
-      lspconfig.ts_ls.setup { on_attach = on_attach, capabilities = capabilities }
-      lspconfig.eslint.setup { on_attach = on_attach, capabilities = capabilities }
-      lspconfig.cssls.setup { capabiliies = capabilities }
-      lspconfig.html.setup { capabiliies = capabilities }
-      lspconfig.marksman.setup { capabilities = capabilities }
-
-      lspconfig.sourcekit.setup {
+      vim.lsp.config('lua_ls', { capabiliies = capabilities })
+      vim.lsp.config('ts_ls', { on_attach = on_attach, capabiliies = capabilities })
+      vim.lsp.config('eslint', { on_attach = on_attach, capabiliies = capabilities })
+      vim.lsp.config('cssls', { capabiliies = capabilities })
+      vim.lsp.config('html', { capabiliies = capabilities })
+      vim.lsp.config('marksman', { capabiliies = capabilities })
+      vim.lsp.config('sourcekit', {
         cmd = { '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp' },
         filetypes = { "swift", "objective-c", "objective-cpp" },
         capabilities = capabilities,
         on_attach = on_attach,
-      }
-
-      -- Ruby and Java configurations — do NOT use Mason to manage these
-      lspconfig.ruby_lsp.setup {
+      })
+      vim.lsp.config('ruby-lsp', {
         cmd = { 'ruby-lsp' },
         filetypes = { 'ruby', 'eruby' },
         init_options = {
@@ -67,17 +62,11 @@ return {
               enablePendingMigrationsPrompt = false,
             },
           },
-          capabilities = capabilities } }
-
-      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-        pattern = { "Podfile", "Podfile.*", "Fastfile", "Fastfile.*" },
-        command = 'set filetype=ruby'
+          capabilities = capabilities
+        }
       })
 
-      lspconfig.jdtls.setup {
-        cmd = {
-          '/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home/'
-        },
+      vim.lsp.config('jdtls', {
         env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home" },
         settings = {
           java = {
@@ -91,8 +80,17 @@ return {
                   name = "JavaSE-24",
                   path = "/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home",
                 },
-              } } } },
-        capabilities = capabilities }
+              }
+            }
+          }
+        },
+        capabilities = capabilities
+      })
+
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        pattern = { "Podfile", "Podfile.*", "Fastfile", "Fastfile.*" },
+        command = 'set filetype=ruby'
+      })
 
       -- LSP key-mappings
       local lsp_cmds = vim.api.nvim_create_augroup('lsp_cmds', { clear = true })
@@ -117,6 +115,7 @@ return {
           bufmap({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>')
           bufmap('n', 'vca', '<cmd>lua vim.lsp.buf.code_action()<cr>')
           bufmap('n', 'fd', '<cmd>lua vim.diagnostic.open_float()<cr>')
+          bufmap('n', '<leader>sd', '<cmd>lua vim.diagnostic.goto_next()<cr>')
           bufmap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<cr>')
           bufmap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<cr>')
         end
