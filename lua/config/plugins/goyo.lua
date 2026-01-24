@@ -13,7 +13,8 @@ return {
       vim.opt.textwidth = 0
       vim.opt.wrapmargin = 0
       vim.opt.breakindent = true
-      vim.opt.relativenumber = true
+      vim.opt.relativenumber = false
+      vim.opt.number = false
 
       local opts = { buffer = true, noremap = true }
       vim.keymap.set('n', 'j', 'gj', opts)

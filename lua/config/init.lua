@@ -5,5 +5,6 @@ require('config.keymaps.splits')
 require('config.keymaps.clipboard')
 
 -- ** VIM SETTINGS ** --
+vim.opt.termguicolors = true;
 vim.opt.relativenumber = true;
 vim.opt.number = true;

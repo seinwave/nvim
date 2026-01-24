@@ -14,3 +14,8 @@ vim.keymap.set("n", "<leader>so", ":so<CR>")
 vim.keymap.set("n", "<leader>q", ":quit<CR>")
 
 vim.keymap.set("n", "<leader>wq", ":wq<CR>")
+
+-- colorschemes
+vim.keymap.set("n", "<leader>csp", ":colorscheme paper<CR>", { desc = "Colorscheme: paper" })
+vim.keymap.set("n", "<leader>cskd", ":colorscheme kanagawa-wave<CR>", { desc = "Colorscheme: kanagawa dark" })
+vim.keymap.set("n", "<leader>cskl", ":colorscheme kanagawa-lotus<CR>", { desc = "Colorscheme: kanagawa light" })
