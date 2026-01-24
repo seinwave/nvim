@@ -66,12 +66,6 @@ return {
         }
       })
 
-      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-        pattern = { "Podfile", "Podfile.*", "Fastfile", "Fastfile.*" },
-        command = 'set filetype=ruby',
-        }
-      )
-
       vim.lsp.config('jdtls', {
         env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home" },
         settings = {
