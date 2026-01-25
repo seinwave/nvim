@@ -13,3 +13,13 @@ vim.api.nvim_set_keymap("n", "<leader>,", "<c-w>5<", { noremap = true, silent = 
 vim.api.nvim_set_keymap("n", "<leader>.", "<c-w>5>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>p", "<C-W>+", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>;", "<C-W>-", { noremap = true, silent = true })
+
+-- no neck pain
+vim.keymap.set('n', '<leader>nnp', function()
+  vim.cmd("NoNeckPain")
+end)
+
+-- goyo
+vim.keymap.set('n', '<leader>gy', function()
+  vim.cmd("Goyo")
+end)
