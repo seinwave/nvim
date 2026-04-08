@@ -52,7 +52,7 @@ return {
         on_attach = on_attach,
       })
       vim.lsp.config('ruby-lsp', {
-        cmd = { 'ruby-lsp' },
+        cmd = { vim.fn.expand('~/.rbenv/shims/ruby-lsp') },
         filetypes = { 'ruby', 'eruby' },
         capabilities = capabilities,
         init_options = {
@@ -67,7 +67,7 @@ return {
       })
 
       vim.lsp.config('jdtls', {
-        env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home" },
+        env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home" },
         settings = {
           java = {
             configuration = {
