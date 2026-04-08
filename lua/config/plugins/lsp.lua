@@ -87,6 +87,10 @@ return {
         capabilities = capabilities
       })
 
+      vim.lsp.enable('ruby-lsp')
+      vim.lsp.enable('sourcekit')
+      vim.lsp.enable('jdtls')
+
       vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
         pattern = { "Podfile", "Podfile.*", "Fastfile", "Fastfile.*" },
         command = 'set filetype=ruby'
