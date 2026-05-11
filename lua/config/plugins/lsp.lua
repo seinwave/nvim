@@ -39,12 +39,12 @@ return {
 
       -- add blink's autocomplete to LSPs
       local capabilities = require('blink.cmp').get_lsp_capabilities()
-      vim.lsp.config('lua_ls', { capabiliies = capabilities })
-      vim.lsp.config('ts_ls', { on_attach = on_attach, capabiliies = capabilities })
-      vim.lsp.config('eslint', { on_attach = on_attach, capabiliies = capabilities })
-      vim.lsp.config('cssls', { capabiliies = capabilities })
-      vim.lsp.config('html', { capabiliies = capabilities })
-      vim.lsp.config('marksman', { capabiliies = capabilities })
+      vim.lsp.config('lua_ls', { capabilities = capabilities })
+      vim.lsp.config('ts_ls', { on_attach = on_attach, capabilities = capabilities })
+      vim.lsp.config('eslint', { on_attach = on_attach, capabilities = capabilities })
+      vim.lsp.config('cssls', { capabilities = capabilities })
+      vim.lsp.config('html', { capabilities = capabilities })
+      vim.lsp.config('marksman', { capabilities = capabilities })
       vim.lsp.config('sourcekit', {
         cmd = { '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/sourcekit-lsp' },
         filetypes = { "swift", "objective-c", "objective-cpp" },
@@ -52,10 +52,11 @@ return {
         on_attach = on_attach,
       })
       vim.lsp.config('ruby-lsp', {
-        cmd = { vim.fn.expand('~/.rbenv/shims/ruby-lsp') },
+        cmd = { 'ruby-lsp' },
         filetypes = { 'ruby', 'eruby' },
         capabilities = capabilities,
         init_options = {
+          useBundler = true,
           formatter = 'standard',
           linters = { 'standard' },
           addonSettings = {
@@ -63,7 +64,7 @@ return {
               enablePendingMigrationsPrompt = false,
             },
           },
-        }
+        },
       })
 
       vim.lsp.config('jdtls', {
