@@ -19,3 +19,7 @@ vim.keymap.set("n", "<leader>wq", ":wq<CR>")
 vim.keymap.set("n", "<leader>csp", ":colorscheme paper<CR>", { desc = "Colorscheme: paper" })
 vim.keymap.set("n", "<leader>cskd", ":colorscheme kanagawa-wave<CR>", { desc = "Colorscheme: kanagawa dark" })
 vim.keymap.set("n", "<leader>cskl", ":colorscheme kanagawa-lotus<CR>", { desc = "Colorscheme: kanagawa light" })
+
+-- escape
+
+vim.keymap.set("i", "<leader>hn", "<esc>", { desc = "Easy remap for esc" })
