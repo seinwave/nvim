@@ -1,9 +1,12 @@
 return {
   {
     'saghen/blink.cmp',
-    dependencies = 'rafamadriz/friendly-snippets',
+    dependencies = {
+      'rafamadriz/friendly-snippets',
+       "saghen/blink.lib"
+     },
 
-    version = 'v0.*',
+    version = false, -- use latest commit
 
     opts = {
       keymap = { preset = 'default' },
@@ -13,7 +16,7 @@ return {
         nerd_font_variant = 'mono'
       },
 
-      signature = { enabled = true }
+      signature = { enabled = false }
     },
   },
 }
