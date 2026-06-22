@@ -49,5 +49,20 @@ vim.keymap.set("n", "<leader>gbg", function()
     vim.cmd("setlocal nomodifiable")
     vim.cmd("file Git_Branches:" .. regex)
     vim.api.nvim_buf_set_keymap(buf, 'n', 'q', ':bd<CR>', { noremap = true, silent = true })
+
+    vim.keymap.set('n', '<CR>', function()
+      local line = vim.api.nvim_get_current_line()
+      -- strip the '* ' current-branch marker and any leading/trailing whitespace
+      local branch = vim.fn.trim((line:gsub("^%s*%*?%s*", "")))
+
+      if branch == "" or not branch:match("^[%w]") then
+        print("No branch on this line.")
+        return
+      end
+
+      vim.cmd("bd")
+      vim.cmd("Git checkout " .. branch)
+      print("Checked out " .. branch)
+    end, { buffer = buf, noremap = true, silent = true })
   end, 200)
 end)
