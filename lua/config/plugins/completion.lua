@@ -12,6 +12,7 @@ return {
       require('blink.cmp').build():pwait()
     end,
     version = false, -- use latest commit
+    lazy = false,
 
       ---@module 'blink.cmp'
       ---@type blink.cmp.Config
