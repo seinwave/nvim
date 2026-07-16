@@ -68,7 +68,7 @@ return {
       })
 
       vim.lsp.config('jdtls', {
-        env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home" },
+        cmd_env = { JAVA_HOME = "/Library/Java/JavaVirtualMachines/temurin-25.jdk/Contents/Home" },
         settings = {
           java = {
             configuration = {
@@ -78,8 +78,8 @@ return {
                   path = "/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home",
                 },
                 {
-                  name = "JavaSE-24",
-                  path = "/Library/Java/JavaVirtualMachines/jdk-24.0.1.jdk/Contents/Home",
+                  name = "JavaSE-25",
+                  path = "/Library/Java/JavaVirtualMachines/temurin-25.jdk/Contents/Home",
                 },
               }
             }
