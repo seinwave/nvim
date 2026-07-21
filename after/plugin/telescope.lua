@@ -20,7 +20,7 @@ vim.keymap.set('n', '<leader>pp', function()
   }
 end)
 
-vim.keymap.set('n', '<leader>:', function()
+vim.keymap.set('n', '<leader>;', function()
   builtin.commands {
     layout_strategy = "center",
     layout_config = { width = 0.5, height = 0.5 },

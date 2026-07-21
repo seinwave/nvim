@@ -11,8 +11,6 @@ vim.api.nvim_set_keymap('n', '<leader>sv', ':vsplit<CR>', { noremap = true, sile
 -- todo: add bindings for your split keeb
 vim.api.nvim_set_keymap("n", "<leader>,", "<c-w>5<", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("n", "<leader>.", "<c-w>5>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>p", "<C-W>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("n", "<leader>;", "<C-W>-", { noremap = true, silent = true })
 
 -- no neck pain
 vim.keymap.set('n', '<leader>nnp', function()
