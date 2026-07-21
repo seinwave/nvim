@@ -19,3 +19,10 @@ vim.keymap.set('n', '<leader>pp', function()
     cwd = vim.fs.joinpath(vim.fn.stdpath('data'), 'lazy')
   }
 end)
+
+vim.keymap.set('n', '<leader>:', function()
+  builtin.commands {
+    layout_strategy = "center",
+    layout_config = { width = 0.5, height = 0.5 },
+  }
+end, { desc = "Command palette" })
