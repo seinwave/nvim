@@ -1,9 +1,12 @@
 local builtin = require('telescope.builtin')
+local float_input = require('config.float_input')
 
 vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
 vim.keymap.set('n', '<C-p>', builtin.git_files, {})
 vim.keymap.set('n', '<leader>ps', function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ") });
+  float_input.input({ prompt = "Grep" }, function(input)
+    if input then builtin.grep_string({ search = input }) end
+  end)
 end);
 
 vim.keymap.set('n', '<leader>pc', function()
