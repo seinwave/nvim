@@ -24,7 +24,10 @@ function M.input(opts, on_confirm)
 
   local function close(text)
     vim.api.nvim_win_close(win, true)
-    vim.schedule(function() on_confirm(text) end)
+    vim.schedule(function()
+      vim.cmd("stopinsert")
+      on_confirm(text)
+    end)
   end
 
   vim.keymap.set("i", "<CR>",  function()
