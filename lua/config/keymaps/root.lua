@@ -1,12 +1,5 @@
 vim.g.mapleader = " "
 
-local float_input = require('config.float_input')
-vim.keymap.set("n", ":", function()
-  float_input.input({ prompt = ":" }, function(input)
-    if input then vim.cmd(input) end
-  end)
-end, { desc = "Floating command input" })
-
 vim.keymap.set("n", "<leader>pv", "<CMD>Oil --float<CR>", { desc = "Open Oil (float) at CWD" })
 vim.keymap.set("n", "-", "<CMD>Oil --float<CR>", { desc = "Open Oil (float) at CWD" })
 
