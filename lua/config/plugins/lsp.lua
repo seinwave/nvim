@@ -133,6 +133,7 @@ return {
           lsp_format = "fallback",
         },
         formatters_by_ft = {
+          java = { "google-java-format" },
           javascript = { "eslint_d", "prettier" },
           javascriptreact = { "eslint_d", "prettier" },
           typescript = { "eslint_d", "prettier" },
