@@ -1,9 +1,17 @@
 return {
+  { "williamboman/mason.nvim", opts = {} },
   {
-    "williamboman/mason.nvim",
     "williamboman/mason-lspconfig.nvim",
-    config = function()
-      require("mason").setup()
-    end
-  }
+    dependencies = { "williamboman/mason.nvim" },
+    opts = {
+      ensure_installed = {
+        'lua_ls',
+        'eslint',
+        'html',
+        'cssls',
+        'ts_ls',
+        'marksman',
+      },
+    },
+  },
 }
